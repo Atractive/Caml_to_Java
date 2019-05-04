@@ -1,17 +1,19 @@
 import java.util.*;
 
 class IntV extends Value {
+	
     /* Fields */
     int iv;
 
     /* Constructors */
     public IntV (int i) {
-	iv = i;
+		iv = i;
     }
 
     int get_int () {
         return iv;
     }
+	
     void set_int (int i) {
         iv = i;
     }
@@ -19,4 +21,5 @@ class IntV extends Value {
     void print_value() {
         System.out.print(iv);
     }
+	
 }

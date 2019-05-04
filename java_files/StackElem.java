@@ -1,3 +1,1 @@
-abstract class StackElem extends Object {
-
-}
+abstract class StackElem extends Object {}

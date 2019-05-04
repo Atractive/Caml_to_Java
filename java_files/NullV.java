@@ -1,3 +1,4 @@
+
 class NullV extends Value {
 
     /* Constructors */
@@ -6,4 +7,5 @@ class NullV extends Value {
     void print_value() {
         System.out.print("Null");
     }
+	
 }
