@@ -1,3 +1,4 @@
+
 all: comp
 
 # Compilation of Ocaml files
@@ -18,7 +19,6 @@ interf.cmo: interf.ml parser.cmo lexer.cmo instrs.cmo
 comp.cmo: comp.ml instrs.cmo parser.cmo interf.cmo
 	ocamlc -c $<
 
-
 # ocaml lexer and parser
 lexer.ml: lexer.mll miniml.cmo
 	ocamllex $<
@@ -31,12 +31,9 @@ lexer.cmo: lexer.ml parser.cmo
 parser.cmo: parser.ml parser.cmi miniml.cmo
 	ocamlc -c $<
 
-
 #### Generic rules
-
 %.cmi: %.mli
 	ocamlc -c $<
-
 
 .PHONY: clean
 

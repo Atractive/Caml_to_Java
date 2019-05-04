@@ -1,3 +1,4 @@
+
 (* Interface with parser *)
 
 exception ParseLexError of exn * (string * int * int * string * string)
@@ -32,6 +33,7 @@ let parse infile =
     failwith "Stopped execution."
 ;;
 
+(* ****************************** *)
 
 let generate infile outfile = 
   (*
@@ -40,4 +42,3 @@ let generate infile outfile =
   output_string outf str ; flush outf;
   *)
   print_string "finished\n"
-

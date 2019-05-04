@@ -1,8 +1,10 @@
+
 #load "miniml.cmo";;
 #load "parser.cmo" ;;
 #load "lexer.cmo" ;;
 #load "instrs.cmo";;
 #load "interf.cmo";;
+
 open Miniml ;;
 open Interf ;;
 open Instrs ;;

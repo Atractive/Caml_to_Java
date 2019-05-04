@@ -1,4 +1,6 @@
+
 {
+
   open Lexing
   open Parser
   open Miniml
@@ -14,69 +16,67 @@
 
 }
 
-let alph =           ['a'-'z''A'-'Z']
-let num  =           ['0'-'9'] 
-let decimal	=	'0'|(['1'-'9']['0'-'9']*)
-let comment = '(' '*' [^'*']* ('*' (('*'*)|([^'*'')'][^'*']*)))* '*' ')'
+let alph =          ['a'-'z''A'-'Z']
+let num  =          ['0'-'9'] 
+let decimal	=		'0'|(['1'-'9']['0'-'9']*)
+let comment = 		'(' '*' [^'*']* ('*' (('*'*)|([^'*'')'][^'*']*)))* '*' ')'
 
 rule token = parse
- [' ' '\t']
-    { token lexbuf }    (* white space: recursive call of lexer *)
-|'\n'
-    {advance_line lexbuf; token lexbuf }    (* white space: recursive call of lexer *)
-| comment
-    { token lexbuf }    (* comment --> ignore *)
-| decimal  as i	  { INTCONSTANT (int_of_string i)}
-| '('  { LPAREN }
-| ')'  { RPAREN }
-| '{'  { LBRACE }
-| '}'  { RBRACE }
-| ','  { COMMA }
-| ';'  { SEMICOLON }
-| ':'  { COLON }
-| '?'  { QMARK }
 
-| "true"       {BCONSTANT true}
-| "false"      {BCONSTANT false}
-| "fst"        {FST}
-| "snd"        {SND}
-| "if"         {IF}
-| "then"       {THEN}
-| "else"       {ELSE}
-| "return"     {RETURN}
+	[' ' '\t']			{ token lexbuf } 
+	|'\n'				{ advance_line lexbuf; token lexbuf }
+	| comment			{ token lexbuf }
+	| decimal as i		{ INTCONSTANT (int_of_string i) }
 
-| "and"        {AND}
-| "->"         {ARROW}
-| "fun"        {FUN}
-| "in"         {IN}
-| "let"        {LET}
-| "rec"        {REC}
-| "type"       {TYPE}
+	| '('  {LPAREN}
+	| ')'  {RPAREN}
+	| '{'  {LBRACE}
+	| '}'  {RBRACE}
+	| ','  {COMMA}
+	| ';'  {SEMICOLON}
+	| ':'  {COLON}
+	| '?'  {QMARK}
 
-| '+'          { ADD }
-| '-'          { SUB }
-| '*'          { MUL }
-| '/'          { DIV }
-| "mod"        { MOD }
+	| "true"       {BCONSTANT true}
+	| "false"      {BCONSTANT false}
+	| "fst"        {FST}
+	| "snd"        {SND}
+	| "if"         {IF}
+	| "then"       {THEN}
+	| "else"       {ELSE}
+	| "return"     {RETURN}
 
-| '='          {EQ}
-| ">="         {GE}
-| '>'          {GT}
-| "<="         {LE}
-| '<'          {LT}
-| "<>"         {NE}
+	| "and"        {AND}
+	| "->"         {ARROW}
+	| "fun"        {FUN}
+	| "in"         {IN}
+	| "let"        {LET}
+	| "rec"        {REC}
+	| "type"       {TYPE}
 
-| "&&"         {BLAND}
-| "||"         {BLOR}
+	| '+'          {ADD}
+	| '-'          {SUB}
+	| '*'          {MUL}
+	| '/'          {DIV}
+	| "mod"        {MOD}
 
-| eof          {EOF}
+	| '='          {EQ}
+	| ">="         {GE}
+	| '>'          {GT}
+	| "<="         {LE}
+	| '<'          {LT}
+	| "<>"         {NE}
 
-| alph(alph|num)* as i  {IDENTIFIER i}
+	| "&&"         {BLAND}
+	| "||"         {BLOR}
 
-| _  {Printf.printf "ERROR: unrecogized symbol '%s'\n" (Lexing.lexeme lexbuf);
-      raise Lexerror }
+	| eof          {EOF}
 
-and
-    ruleTail acc = parse
-| eof { acc }
-| _* as str { ruleTail (acc ^ str) lexbuf }
+	| alph(alph|num)* as i  {IDENTIFIER i}
+
+	| _  {Printf.printf "ERROR: unrecogized symbol '%s'\n" (Lexing.lexeme lexbuf);
+		  raise Lexerror}
+		  
+and ruleTail acc = parse
+	| eof 			{ acc }
+	| _* as str 	{ ruleTail (acc ^ str) lexbuf }
