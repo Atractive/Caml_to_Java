@@ -56,9 +56,9 @@ end_marker_opt:
 ;
 
 typedef:
-	{ None }
+  { None }
 |  TYPE IDENTIFIER
-	{  Some ($2) }
+	{ Some ($2) }
 ;
 
 mult_exp:
