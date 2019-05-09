@@ -51,7 +51,7 @@ class Config extends Object {
         return this.ss;
     }
 	
-	LinkedList<Couple<String,LinkedList<Instr>>> f getFds() {
+	LinkedList<Couple<String,LinkedList<Instr>>> getFds() {
 		return this.fds;
 	}
 	
