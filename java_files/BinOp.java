@@ -15,17 +15,17 @@ public class BinOp extends Instr {
 		Value v = null;
 		
         switch(o){
-            case Add: 	v = new IntV(operArith((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())));
-            case Sub: 	v = new IntV(operArith((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())));
-            case Mult: 	v = new IntV(operArith((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())));
-			case Mod: 	v = new IntV(operArith((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())));
-            case Div: 	v = new IntV(operArith((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())));
-			case Eq:	v = new BoolV(operComp((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())));
-			case Ge:	v = new BoolV(operComp((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())));
-			case Gt:	v = new BoolV(operComp((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())));
-			case Le:	v = new BoolV(operComp((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())));
-			case Lt:	v = new BoolV(operComp((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())));
-			case Ne:	v = new BoolV(operComp((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())));
+            case Add: 	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
+            case Sub: 	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
+            case Mult: 	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
+			case Mod: 	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
+            case Div: 	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
+			case Eq:	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
+			case Ge:	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
+			case Gt:	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
+			case Le:	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
+			case Lt:	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
+			case Ne:	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
         }
 		
 		cfg.set_value(v);
