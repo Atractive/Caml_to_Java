@@ -11,7 +11,7 @@ public class Main {
 		Map<String,LinkedList<Instr>> fds;
         Config cfg;
 
-        cfg = new Config(new NullV(), Gen.code, LLE.empty(), new HashMap<String,LinkedList<Instr>>());
+        cfg = new Config(new NullV(), Gen.code, LLE.empty(), new LinkedList<Couple<String,LinkedList<Instr>>>());
         cfg.exec();
         cfg.getValue().printValue();
         System.out.println();
