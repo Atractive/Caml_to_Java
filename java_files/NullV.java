@@ -5,7 +5,7 @@ public class NullV extends Value {
     /* Constructors */
     public NullV () {}
 	
-    void print_value() {
+    void printValue() {
         System.out.print("Null");
     }
 	

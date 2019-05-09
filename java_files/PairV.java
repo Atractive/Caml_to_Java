@@ -3,8 +3,8 @@ import java.util.*;
 public class PairV extends Value{
 	
 	/* Fields */
-    Value fst;
-	Value snd;
+    private Value fst;
+	private Value snd;
     
 	/* Constructors */
     public PairV(Value f, Value s) {
@@ -28,7 +28,7 @@ public class PairV extends Value{
 		return this.s;
 	}
 	
-	void print_value() {
+	void printValue() {
         System.out.println(this.fst);
 		System.out.println(this.snd);
     }

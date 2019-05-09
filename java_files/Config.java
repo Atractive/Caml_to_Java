@@ -2,56 +2,62 @@ import java.util.*;
 
 class Config extends Object {
 	
-    Value vv;
-    LinkedList<Instr> cc;
-    LinkedList<StackElem> ss;
-	Map<String,LinkedList<Instr>> fds;
+    private Value vv;
+    private LinkedList<Instr> cc;
+    private LinkedList<StackElem> ss;
+	private Map<String,LinkedList<Instr>> fds;
 	
 	/* Constructors */
     public Config (Value v, LinkedList<Instr> c, LinkedList<StackElem> s, Map<String,LinkedList<Instr>> f) {
-        vv = v;
-        cc = c;
-        ss = s;
-		fds = f;
+        this.vv = v;
+        this.cc = c;
+        this.ss = s;
+		this.fds = f;
     }
 	
+	/* ********************* */
 	/* Set */
+	/* ********************* */
 	
-	void set_value(Value v) {
+	void setValue(Value v) {
         this.vv = v;
     }
 	
-    void set_code(LinkedList<Instr> c) {
+    void setCode(LinkedList<Instr> c) {
         this.cc = c;
     }
 	
-    void get_stack(LinkedList<StackElem> s) {
+    void getStack(LinkedList<StackElem> s) {
         this.ss = s;
     }
 	
-	void set_fds(Map<String,LinkedList<Instr>> f) {
+	void setFds(Map<String,LinkedList<Instr>> f) {
 		this.fds = f;
 	}
 	
+	/* ********************* */
 	/* Get */
+	/* ********************* */
 
-    Value get_value() {
+    Value getValue() {
         return this.vv;
     }
 	
-    LinkedList<Instr> get_code() {
+    LinkedList<Instr> getCode() {
         return this.cc;
     }
 	
-    LinkedList<StackElem> get_stack() {
+    LinkedList<StackElem> getStack() {
         return this.ss;
     }
 	
-	Map<String,LinkedList<Instr>> get_fds() {
+	Map<String,LinkedList<Instr>> getFds() {
 		return this.fds;
 	}
 	
+	/* ********************* */
 	/* exec */
+	/* ********************* */
 
     // one-step execution 
     boolean exec_step() {

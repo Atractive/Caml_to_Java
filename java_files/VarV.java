@@ -3,22 +3,22 @@ import java.util.*;
 public class VarV extends Value {
 
     /* Fields */
-    String vv;
+    private String vv;
 
     /* Constructors */
     public VarV (String v) {
 		this.vv = v;
     }
 	
-	void set_var (String v) {
+	void setValue (String v) {
         this.vv = v;
     }
 
-    String get_var () {
+    String getValue () {
         return this.vv;
     }
 
-    void print_value() {
+    void printValue() {
         System.out.print(this.vv);
     }
 	

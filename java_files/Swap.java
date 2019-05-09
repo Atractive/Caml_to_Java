@@ -3,11 +3,15 @@ import java.util.*;
 public class Swap extends Instr {
 	
     void exec_instr(Config cfg) {
-		ValueSE y = ((ValueSE)(cfg.get_stack().pop()));
-		ValueSE x = new ValueSE(cfg.get_value());
-		cfg.set_value(y.get_value());
-		cfg.get_stack().add(x);
-        cfg.get_code().pop();
+		
+		//On met à jour le terme et on l'ajoute
+		ValueSE y = ((ValueSE)(cfg.getStack().pop()));
+		ValueSE x = new ValueSE(cfg.getValue());
+		cfg.setValue(y.getValue());
+		cfg.getStack().add(x);
+		
+		//On dépile
+        cfg.getCode().pop();
     }
 	
 }

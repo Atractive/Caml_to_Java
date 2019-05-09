@@ -3,24 +3,24 @@ import java.util.*;
 public class Quote extends Instr {
 	
 	/* Fields */
-    Value vv;
+    private Value vv;
 	
 	/* Constructors */
     public Quote (Value v) {
         this.vv = v;
     }
 	
-	void set_value(Value v) {
+	void setValue(Value v) {
         this.vv = v;
     }
 
-    Value get_value() {
+    Value getValue() {
         return this.vv;
     }
 
     void exec_instr(Config cfg) {
-        cfg.set_value(this.vv);
-        cfg.get_code().pop();
+        cfg.setValue(this.vv);
+        cfg.getCode().pop();
     }
 	
 }

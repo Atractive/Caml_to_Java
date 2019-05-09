@@ -3,8 +3,8 @@ import java.util.*;
 class ClosureV extends Value {
 	
     /* Fields */
-    LinkedList<Instr> cc;
-	Value vv;
+    private LinkedList<Instr> cc;
+	private Value vv;
 
     /* Constructors */
     public ClosureV (LinkedList<Instr> c, Value v) {
@@ -12,15 +12,15 @@ class ClosureV extends Value {
 		this.vv = v;
     }
 
-    LinkedList<Instr> get_code () {
+    LinkedList<Instr> getCode () {
         return this.cc;
     }
 	
-    Value get_val () {
+    Value getValue () {
         return this.vv;
     }
 
-    void print_value() {
+    void printValue() {
         System.out.print(this.vv);
     }
 	

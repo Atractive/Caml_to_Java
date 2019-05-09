@@ -2,17 +2,21 @@ import java.util.*;
 
 public class RmDefs extends Instr {
 	
-	int nn;
+	private int nn;
 	
 	public RmDefs (int n){
 		this.nn = n;
 	}
 	
 	void exec_instr(Config cfg) {
-		cfg.get_code().pop();
-		LinkedList<Couple<String, LinkedList<Instr>>> fds = cfg.get_fds();
+		
+		//On dépile
+		cfg.getCode().pop();
+		
+		//On met à jour le terme et on l'ajoute
+		LinkedList<Couple<String,LinkedList<Instr>>> fds = cfg.getFds();
 		for(int i=0;i<n;i++) {fds.pop();}
-		cfg.set_fds(new LinkedList<Couple<String,LinkedList<Instr>>> (fds));
+		cfg.setFds(new LinkedList<Couple<String,LinkedList<Instr>>> (fds));
     }
 	
 }

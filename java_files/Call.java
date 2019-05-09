@@ -2,23 +2,30 @@ import java.util.*;
 
 public class Call extends Instr {
 	
-	String ss;
+	private String ss;
 	
 	public Call (String s) {
 		this.ss = s;
 	}
 	
-	void exec_instr(Config cfgg) {
-		cfg.get_code().pop();
-		LinkedList<Couple<String, LinkedList<Instr>>> fds = cfg.get_fds();
+	void exec_instr(Config cfg) {
+		
+		//On dépile
+		cfg.getCode().pop();
+		
+		//On recupère la pile de la config
+		LinkedList<Couple<String,LinkedList<Instr>>> fds = cfg.getFds();
+		
+		//On met à jour la pile et on l'ajoute
 		for (int i=0; i<fds.size(); i++){
-			if (fds.get(i).get_fst().equals(v)){
-				LinkedList<Instr> c = new LinkedList<Instr>(fds.get(i).get_snd());
-				c.addAll(cfg.get_code());
-				cfg.set_code(c);
+			if (fds.get(i).getFst().equals(v)){
+				LinkedList<Instr> c = new LinkedList<Instr>(fds.get(i).getSnd());
+				c.addAll(cfg.getCode());
+				cfg.setCode(c);
 				break;
 			}
 		}
+		
 	}
     
 }

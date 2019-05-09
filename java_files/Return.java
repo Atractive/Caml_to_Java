@@ -3,9 +3,14 @@ import java.util.*;
 public class Return extends Instr {
 	
     void exec_instr(Config cfg) {
-		cfg.get_code().pop();
-		CodeSE c = ((CodeSE)(cfg.get_stack().pop()));
-		cfg.set_code(c.get_code());
+		
+		//On dépile
+		cfg.getCode().pop();
+		
+		//On met à jour le terme et on l'ajoute
+		CodeSE c = ((CodeSE)(cfg.getStack().pop()));
+		cfg.setCode(c.getCode());
+		
     }
 	
 }

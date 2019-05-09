@@ -2,8 +2,8 @@ import java.util.*;
 
 public class Branch extends Instr {
 	
-    LinkedList<Instr> cc1;
-	LinkedList<Instr> cc2;
+    private LinkedList<Instr> cc1;
+	private LinkedList<Instr> cc2;
 
     /* Constructors */
     public Branch(LinkedList<Instr> c1, LinkedList<Instr> c2) {
@@ -11,16 +11,16 @@ public class Branch extends Instr {
 		this.cc2 = c2;
     }
 	    
-    LinkedList<Instr> get_code1() {
+    LinkedList<Instr> getCode1() {
         return this.cc1;
     }
 
-    LinkedList<Instr> get_code2() {
+    LinkedList<Instr> getCode2() {
         return this.cc2;
     }
 	
     void exec_instr(Config cfg) {
-        cfg.get_code().pop();
+        cfg.getCode().pop();
     }
 	
 }

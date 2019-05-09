@@ -13,7 +13,7 @@ public class Main {
 
         cfg = new Config(new NullV(), Gen.code, LLE.empty(), new HashMap<String,LinkedList<Instr>>());
         cfg.exec();
-        cfg.get_value().print_value();
+        cfg.getValue().printValue();
         System.out.println();
         
     }

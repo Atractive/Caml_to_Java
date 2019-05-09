@@ -3,22 +3,22 @@ import java.util.*;
 public class BoolV extends Value {
 	
     /* Fields */
-    Boolean bv;
+    private Boolean bv;
 
     /* Constructors */
     public BoolV (Boolean b) {
 		this.bv = b;
     }
 	
-	void set_boolean (Boolean b) {
+	void setBoolean (Boolean b) {
         this.bv = b;
     }
 
-    Boolean get_boolean () {
+    Boolean getBoolean () {
         return this.bv;
     }
 
-    void print_value() {
+    void printValue() {
         System.out.print(this.bv);
     }
 	

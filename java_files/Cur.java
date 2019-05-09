@@ -2,17 +2,22 @@ import java.util.*;
 
 public class Cur extends Instr {
 	
-	LinkedList<Instr> cc;
+	private LinkedList<Instr> cc;
 	
 	public Cur (LinkedList<Instr> c){
 		this.cc = c;
 	}
 	
     void exec_instr(Config cfg) {
-		ValueSE x = new ValueSE(cfg.get_value());
-		ClosureV cl = new ClosureV(this.cc,x.get_value());
-		cf.set_value(cl);
-		cf.get_code().pop();
+		
+		//On met à jour le terme et on l'ajoute
+		ValueSE x = new ValueSE(cfg.getValue());
+		ClosureV cl = new ClosureV(this.cc,x.getValue());
+		cf.setValue(cl);
+		
+		//On dépile
+		cf.getCode().pop();
+		
     }
 	
 }
