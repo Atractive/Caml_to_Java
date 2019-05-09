@@ -82,20 +82,20 @@ let exec = function
 
 (* Compile *)
 
-let rec compile_aux = function
+let rec compile = function
 	|(env,Bool(b)) -> [Quote(BoolV(b))] (* Bool *)
 	|(env,Int(i)) -> [Quote(IntV(i))] (* Int *)
 	|(env,Var(v)) -> [Quote(VarV(v))] (* Var *)
-	|(env,Fn(v,e)) -> [Cur((compile_aux(VarV(v)::env, e))@[Return])]
-	|(env,App(PrimOp(p),e)) -> compile_aux(env,e)@[PrimInstr(p)]
-	|(env,App(f,a)) -> [Push]@(compile_aux(env,f))@[Swap]@(compile_aux(env,a))@[Cons;App]
-	|(env,Pair(e1,e2)) -> [Push]@(compile_aux(env,e1))@[Swap]@(compile_aux(env,e2))@[Cons]
-	|(env,Cond(i,t,e)) -> [Push]@compile_aux(env,i)@[Branch(compile_aux(env,t)@[Return],compile_aux(env,e)@[Return])]
+	|(env,Fn(v,e)) -> [Cur((compile(VarV(v)::env, e))@[Return])]
+	|(env,App(PrimOp(p),e)) -> compile(env,e)@[PrimInstr(p)]
+	|(env,App(f,a)) -> [Push]@(compile(env,f))@[Swap]@(compile(env,a))@[Cons;App]
+	|(env,Pair(e1,e2)) -> [Push]@(compile(env,e1))@[Swap]@(compile(env,e2))@[Cons]
+	|(env,Cond(i,t,e)) -> [Push]@compile(env,i)@[Branch(compile(env,t)@[Return],compile(env,e)@[Return])]
 	(* Appels récursifs *)
 	(* ... *)
 	
-let compile = function
-	Prog(t,exp) -> compile_aux([],exp);;
+let compile_prog = function
+	Prog(t,exp) -> compile([],exp);;
 
 (* ****************************** *)
 
