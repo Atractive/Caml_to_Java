@@ -13,10 +13,10 @@ public class Cur extends Instr {
 		//On met à jour le terme et on l'ajoute
 		ValueSE x = new ValueSE(cfg.getValue());
 		ClosureV cl = new ClosureV(this.cc,x.getValue());
-		cf.setValue(cl);
+		cfg.setValue(cl);
 		
 		//On dépile
-		cf.getCode().pop();
+		cfg.getCode().pop();
 		
     }
 	

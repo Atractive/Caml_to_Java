@@ -15,7 +15,7 @@ public class RmDefs extends Instr {
 		
 		//On met à jour le terme et on l'ajoute
 		LinkedList<Couple<String,LinkedList<Instr>>> fds = cfg.getFds();
-		for(int i=0;i<n;i++) {fds.pop();}
+		for(int i=0;i<this.nn;i++) {fds.pop();}
 		cfg.setFds(new LinkedList<Couple<String,LinkedList<Instr>>> (fds));
     }
 	

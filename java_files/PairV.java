@@ -21,11 +21,11 @@ public class PairV extends Value{
 	}
     
     public Value getValueFst() {
-		return this.f;
+		return this.fst;
 	}
 	
     public Value getValueSnd() {
-		return this.s;
+		return this.snd;
 	}
 	
 	void printValue() {
