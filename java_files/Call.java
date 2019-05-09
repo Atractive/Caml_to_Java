@@ -18,7 +18,7 @@ public class Call extends Instr {
 		
 		//On met à jour la pile et on l'ajoute
 		for (int i=0; i<fds.size(); i++){
-			if (fds.get(i).getFst().equals(v)){
+			if (fds.get(i).getFst().equals(this.ss)){
 				LinkedList<Instr> c = new LinkedList<Instr>(fds.get(i).getSnd());
 				c.addAll(cfg.getCode());
 				cfg.setCode(c);

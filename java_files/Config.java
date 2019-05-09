@@ -5,7 +5,7 @@ class Config extends Object {
     private Value vv;
     private LinkedList<Instr> cc;
     private LinkedList<StackElem> ss;
-	private Map<String,LinkedList<Instr>> fds;
+	private LinkedList<Couple<String,LinkedList<Instr>>> fds;
 	
 	/* Constructors */
     public Config (Value v, LinkedList<Instr> c, LinkedList<StackElem> s, Map<String,LinkedList<Instr>> f) {

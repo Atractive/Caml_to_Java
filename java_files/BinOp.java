@@ -28,8 +28,8 @@ public class BinOp extends Instr {
 			case Ne:	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
         }
 		
-		cfg.set_value(v);
-		cfg.get_code().pop();
+		cfg.setValue(v);
+		cfg.getCode().pop();
 		
     }
     
