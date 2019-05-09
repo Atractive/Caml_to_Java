@@ -31,7 +31,7 @@ class Config extends Object {
         this.ss = s;
     }
 	
-	void setFds(Map<String,LinkedList<Instr>> f) {
+	void setFds(LinkedList<Couple<String,LinkedList<Instr>>> f) {
 		this.fds = f;
 	}
 	
@@ -51,7 +51,7 @@ class Config extends Object {
         return this.ss;
     }
 	
-	Map<String,LinkedList<Instr>> getFds() {
+	LinkedList<Couple<String,LinkedList<Instr>>> f getFds() {
 		return this.fds;
 	}
 	

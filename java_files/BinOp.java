@@ -6,7 +6,7 @@ public class BinOp extends Instr {
     private operateur o;
     
     public BinOp(operateur op) {
-        this.o = oper;
+        this.o = op;
     }
     
     public void exec_instr(Config cfg) {
@@ -14,7 +14,7 @@ public class BinOp extends Instr {
 		PairV p = ((PairV)(cfg.getValue()));
 		Value v = null;
 		
-        switch(op){
+        switch(o){
             case Add: 	v = new IntV(operArith((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())));
             case Sub: 	v = new IntV(operArith((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())));
             case Mult: 	v = new IntV(operArith((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())));
@@ -35,7 +35,7 @@ public class BinOp extends Instr {
     
     public int operArith(IntV x, IntV y) {
 		
-        switch(op){
+        switch(o){
             case Add:
                 return x.getInt() + y.getInt();
             case Sub:
@@ -54,7 +54,7 @@ public class BinOp extends Instr {
 	
 	public boolean operComp(IntV x, IntV y) {
 		
-        switch(op){
+        switch(o){
             case Eq:
                 return x.getInt() == y.getInt();
             case Ge:
