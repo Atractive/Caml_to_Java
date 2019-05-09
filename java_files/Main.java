@@ -8,9 +8,10 @@ public class Main {
 
         LinkedList<Integer> ll1, ll2;
         LinkedList<Instr> example_code ;
+		Map<String,LinkedList<Instr>> fds;
         Config cfg;
 
-        cfg = new Config(new NullV(), Gen.code, LLE.empty());
+        cfg = new Config(new NullV(), Gen.code, LLE.empty(), new HashMap<String,LinkedList<Instr>>());
         cfg.exec();
         cfg.get_value().print_value();
         System.out.println();
