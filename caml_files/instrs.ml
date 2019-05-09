@@ -80,20 +80,41 @@ let exec = function
 	
 (* ****************************** *)
 
+(* Access *)
+
+type envelem = EVar of var | EDef of var list;;
+
+let rec access_aux_def v env = match env with
+	[] -> failwith "La définition n'existe pas"
+	| (x::env) -> if (v=x)
+					then [Call x]
+					else (access_aux_def v env);;
+
+let rec access_aux_var v env result = match env with
+    [] -> failwith "La variable n'existe pas"
+    | EVar(x)::env -> if (x=v)
+						then result@[PrimInstr(UnOp(Snd))]
+						else (access_aux_var v env ((PrimInstr(UnOp(Fst)))::result))
+    | EDef(x)::env -> (access_aux_def v x);;
+
+let access v env = access_aux_var v env [];;
+
+(* ****************************** *)
+
 (* Compile *)
 
 let rec compile = function
 	|(env,Bool(b)) -> [Quote(BoolV(b))] (* Bool *)
 	|(env,Int(i)) -> [Quote(IntV(i))] (* Int *)
-	|(env,Var(v)) -> [Quote(VarV(v))] (* Var *)
-	|(env,Fn(v,e)) -> [Cur((compile(VarV(v)::env, e))@[Return])]
+	|(env,Var(v)) -> access v env (* Var *)
+	|(env, Fn(v,e)) -> [Cur((compile(EVar(v)::env, e))@[Return])]
 	|(env,App(PrimOp(p),e)) -> compile(env,e)@[PrimInstr(p)]
 	|(env,App(f,a)) -> [Push]@(compile(env,f))@[Swap]@(compile(env,a))@[Cons;App]
 	|(env,Pair(e1,e2)) -> [Push]@(compile(env,e1))@[Swap]@(compile(env,e2))@[Cons]
 	|(env,Cond(i,t,e)) -> [Push]@compile(env,i)@[Branch(compile(env,t)@[Return],compile(env,e)@[Return])]
 	(* Appels récursifs *)
 	(* ... *)
-	
+
 let compile_prog = function
 	Prog(t,exp) -> compile([],exp);;
 

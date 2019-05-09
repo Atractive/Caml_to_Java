@@ -15,17 +15,17 @@ public class BinOp extends Instr {
 		Value v = null;
 		
         switch(o){
-            case Add: 	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
-            case Sub: 	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
-            case Mult: 	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
-			case Mod: 	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
-            case Div: 	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
-			case Eq:	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
-			case Ge:	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
-			case Gt:	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
-			case Le:	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
-			case Lt:	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
-			case Ne:	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd()))));
+            case Add: 	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())))); break;
+            case Sub: 	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())))); break;
+            case Mult: 	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())))); break;
+			case Mod: 	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())))); break;
+            case Div: 	v = new IntV(operArith(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())))); break;
+			case Eq:	v = new BoolV(operComp(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())))); break;
+			case Ge:	v = new BoolV(operComp(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())))); break;
+			case Gt:	v = new BoolV(operComp(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())))); break;
+			case Le:	v = new BoolV(operComp(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())))); break; 
+			case Lt:	v = new BoolV(operComp(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())))); break;
+			case Ne:	v = new BoolV(operComp(((IntV)(p.getValueFst())),((IntV)(p.getValueSnd())))); break;
         }
 		
 		cfg.setValue(v);
@@ -34,7 +34,7 @@ public class BinOp extends Instr {
     }
     
     public int operArith(IntV x, IntV y) {
-		
+
         switch(o){
             case Add:
                 return x.getInt() + y.getInt();
@@ -53,7 +53,7 @@ public class BinOp extends Instr {
     }
 	
 	public boolean operComp(IntV x, IntV y) {
-		
+
         switch(o){
             case Eq:
                 return x.getInt() == y.getInt();
@@ -68,10 +68,9 @@ public class BinOp extends Instr {
 			case Ne:
 				return x.getInt() != y.getInt();
             default: 
-                return false;
+                return true;
         }
 		
     }
 	
 }
-

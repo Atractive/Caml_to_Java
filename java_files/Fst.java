@@ -2,7 +2,7 @@
 
 public class Fst extends Instr {
 	
-    void exec_inst(Config cfg) {
+    void exec_instr(Config cfg) {
 		
 		//On met à jour le terme et on l'ajoute
         cfg.setValue(((PairV)(cfg.getValue())).getValueFst());
