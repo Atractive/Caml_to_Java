@@ -20,7 +20,30 @@ public class Branch extends Instr {
     }
 	
     void exec_instr(Config cfg) {
-        cfg.getCode().pop();
+		
+		//On dépile
+        cf.getCode().pop();
+		
+		//On récupère le booleen
+		BoolV b = (BoolV) cf.getValue();
+		
+		//On dépile la pile
+		ValueSE x = (ValueSE) cf.getStack().pop();
+		
+		//On donne la valeur de x dans le terme de la config
+		cf.setValue(x.getValue());
+		
+		//On ajoute le reste du code dans la pile
+		cf.getStack().addFirst(new CodeSE(cf.getCode()));
+		
+		//On execute un code différent selon le booleen
+		//Ici, on copie la liste pour éviter les problèmes évoqués dans le sujet
+		if (b.getBoolean()) {
+			cf.setCode(new LinkedList<Instr> (code1));
+		} else {
+			cf.setCode(new LinkedList<Instr> (code2));
+		}
+    
     }
 	
 }

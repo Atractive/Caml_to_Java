@@ -16,9 +16,8 @@ public class App extends Instr {
 		//On met à jour le terme et on l'ajoute
 		PairV new_p = new PairV(y.getValue(),z.getValue());
 		cfg.setValue(new_p);
-		cfg.getStack().add(new CodeSE(cfg.getCode()));
-		cfg.setCode(cl.getCode());
-
+		cfg.getStack().addFirst(new CodeSE(cfg.getCode()));
+		cfg.setCode(new LinkedList<Instr>(cl.getCode()));
     }
 	
 }
