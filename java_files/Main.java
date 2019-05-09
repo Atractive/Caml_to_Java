@@ -11,7 +11,7 @@ public class Main {
 		LinkedList<Couple<String,LinkedList<Instr>>> fds;
         Config cfg;
 
-        cfg = new Config(new NullV(),Gen.code,LLE.empty(),LLE.empty());
+        cfg = new Config(new NullV(),Gen.code,LLE<Instr>.empty(),LLE<Instr>.empty());
         cfg.exec();
         cfg.getValue().printValue();
         System.out.println();
