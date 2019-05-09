@@ -100,3 +100,54 @@ let compile = function
 	Prog(t,exp) -> compile_aux([],exp);;
 
 (* ****************************** *)
+
+let rec print_instr = function
+	(* Divers *)
+	(PrimInstr(UnOp(Fst))::config) -> "\nLLE.add_elem(new Fst(),"^print_instr(config)^")" (* Fst *)
+	|(PrimInstr(UnOp(Snd))::config) -> "\nLLE.add_elem(new Snd(),"^print_instr(config)^")" (* Snd *)
+	|(Cons::config) -> "\nLLE.add_elem(new Cons()," ^ print_instr(config)^")" (* Cons *)
+	|(Push::config) -> "\nLLE.add_elem(new Push()," ^ print_instr(config)^")" (* Push *)
+	|(Swap::config) -> "\nLLE.add_elem(new Swap()," ^ print_instr(config)^")" (* Swap *)
+	|((Quote v)::config) -> "\nLLE.add_elem(new Quote("^ print_value(v) ^"),"^print_instr(config)^")" (* Quote *)
+	|((Cur c)::config) ->"\nLLE.add_elem(new Cur("^print_instr(c)^"),"^print_instr(config)^")" (* Cur *)
+	|(Return::config) -> "\nLLE.add_elem(new Return(),"^print_instr(config)^")" (* Return *)
+	|(App::config) -> "\nLLE.add_elem(new App(),"^print_instr(config)^")" (* App *)
+	|(Branch(c1,c2) :: config) -> "\nLLE.add_elem(new Branch("^print_instr(c1)^","^print_instr(c2)^")," ^ print_instr(config)^")" (* Branch *)
+	(* Opérations *)
+	|(PrimInstr(BinOp(BArith(BAadd)))::config) -> "\nLLE.add_elem(new BinOp(BinOp.operateur.Add),"^print_instr(config)^")" (* + *)
+	|(PrimInstr(BinOp(BArith(BAsub)))::config) -> "\nLLE.add_elem(new BinOp(BinOp.operateur.Sub),"^print_instr(config)^")" (* - *)
+	|(PrimInstr(BinOp(BArith(BAmul)))::config) -> "\nLLE.add_elem(new BinOp(BinOp.operateur.Mult),"^print_instr(config)^")" (* * *)
+	|(PrimInstr(BinOp(BArith(BAdiv)))::config) -> "\nLLE.add_elem(new BinOp(BinOp.operateur.Div),"^print_instr(config)^")" (* / *)
+	|(PrimInstr(BinOp(BArith(BAmod)))::config) -> "\nLLE.add_elem(new BinOp(BinOp.operateur.Mod),"^print_instr(config)^")" (* mod *)
+	|(PrimInstr(BinOp(BCompar(BCeq)))::config) -> "\nLLE.add_elem(new BinOp(BinOp.operateur.Eq),"^print_instr(config)^")" (* == *)
+	|(PrimInstr(BinOp(BCompar(BCge)))::config) -> "\nLLE.add_elem(new BinOp(BinOp.operateur.Ge),"^print_instr(config)^")" (* >= *)
+	|(PrimInstr(BinOp(BCompar(BCgt)))::config) -> "\nLLE.add_elem(new BinOp(BinOp.operateur.Gt),"^print_instr(config)^")" (* > *)
+	|(PrimInstr(BinOp(BCompar(BCle)))::config) -> "\nLLE.add_elem(new BinOp(BinOp.operateur.Le),"^print_instr(config)^")" (* <= *)
+	|(PrimInstr(BinOp(BCompar(BClt)))::config) -> "\nLLE.add_elem(new BinOp(BinOp.operateur.Lt),"^print_instr(config)^")" (* < *)
+	|(PrimInstr(BinOp(BCompar(BCne)))::config) -> "\nLLE.add_elem(new BinOp(BinOp.operateur.Ne),"^print_instr(config)^")" (* <> *)
+	(* Appels récursifs *)
+	|((Call f)::config) -> "\nLLE.add_elem(new Call(\""^f^"\")," ^ print_instr(config) ^ ")"
+	|((AddDefs defs)::config) -> "\nLLE.add_elem(new AddDefs("^ print_defs defs ^"),"^print_instr(config) ^")"
+	|((RmDefs n)::config) -> "\nLLE.add_elem(new RmDefs("^string_of_int(n)^"),"^print_instr(config)^ ")"
+	(* Cas de base *)
+	|[] -> "LLE.empty()"
+
+(*Partie représentant l'écriture des différentes Value*)
+and print_value = function 
+	  NullV -> "new NullV()"
+	| IntV(v) -> "new IntV("^(string_of_int v)^")"
+	| BoolV(b) -> "new BoolV("^(string_of_bool b)^")"
+	| PairV(x,y) -> "new PairV("^print_value(x)^","^print_value(y)^")"
+	| ClosureV(c,v) -> "new ClosureV("^print_instr(c)^","^print_value(v)^")"
+	
+(*Partie représentant l'écrire de lapile de définitions de fonctions en Java*)
+and print_defs = function
+	((name,body)::defs) -> "LLE.add_elem(new Couple(\""^name^"\","^(print_instr body)^"), "^(print_defs defs)^")"
+    | [] -> "LLE.empty()";;
+
+(*Fonction permettant d'écrire en Java le code compilé en Caml.*)
+let print_gen_class_to_java = function 
+	cfg -> "import java.util.*; \n" ^
+			"public class Gen { \n" ^
+			"public static LinkedList<Instr> code =" ^
+				print_instr(cfg) ^"; \n}";;
