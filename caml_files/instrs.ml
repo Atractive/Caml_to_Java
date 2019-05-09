@@ -101,19 +101,31 @@ let access v env = access_aux_var v env [];;
 
 (* ****************************** *)
 
+let rec addNameFunction defs = match defs with
+	|((name, body)::defs) -> name :: addNameFunction(defs)
+	| [] -> [];;
+
+let rec compileBody defs env f = match defs with
+	|((name, body)::defs) -> (name,f(env,body)) :: (compileBody (defs) (env) (f) )
+	|[] -> [];;
+	
+(* ****************************** *)
+
 (* Compile *)
 
 let rec compile = function
 	|(env,Bool(b)) -> [Quote(BoolV(b))] (* Bool *)
 	|(env,Int(i)) -> [Quote(IntV(i))] (* Int *)
 	|(env,Var(v)) -> access v env (* Var *)
-	|(env, Fn(v,e)) -> [Cur((compile(EVar(v)::env, e))@[Return])]
+	|(env,Fn(v,e)) -> [Cur((compile(EVar(v)::env, e))@[Return])]
 	|(env,App(PrimOp(p),e)) -> compile(env,e)@[PrimInstr(p)]
 	|(env,App(f,a)) -> [Push]@(compile(env,f))@[Swap]@(compile(env,a))@[Cons;App]
 	|(env,Pair(e1,e2)) -> [Push]@(compile(env,e1))@[Swap]@(compile(env,e2))@[Cons]
 	|(env,Cond(i,t,e)) -> [Push]@compile(env,i)@[Branch(compile(env,t)@[Return],compile(env,e)@[Return])]
 	(* Appels récursifs *)
-	(* ... *)
+	|(env,Fix(defs,e)) -> let dc = (compileBody (defs) (EDef((addNameFunction defs))::env) (compile)) in 
+								let ec = compile(EDef((addNameFunction defs))::env,e) in 
+									[AddDefs dc] @ ec @ [RmDefs (List.length dc)];;
 
 let compile_prog = function
 	Prog(t,exp) -> compile([],exp);;
