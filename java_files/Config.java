@@ -1,4 +1,4 @@
-import java.util.*;
+
 
 class Config extends Object {
 	
@@ -8,7 +8,7 @@ class Config extends Object {
 	private LinkedList<Couple<String,LinkedList<Instr>>> fds;
 	
 	/* Constructors */
-    public Config (Value v, LinkedList<Instr> c, LinkedList<StackElem> s, Map<String,LinkedList<Instr>> f) {
+    public Config (Value v, LinkedList<Instr> c, LinkedList<StackElem> s, LinkedList<Couple<String,LinkedList<Instr>>> f) {
         this.vv = v;
         this.cc = c;
         this.ss = s;
@@ -61,8 +61,11 @@ class Config extends Object {
 
     // one-step execution 
     boolean exec_step() {
-        if (c.isEmpty()) {return false;} 
-		else {return true;}
+        if (this.cc.isEmpty()) {return false;} 
+		else {
+			this.cc.get(0).exec_instr(this);			
+			return true;
+		}
     }
 
     // run to completion

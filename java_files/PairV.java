@@ -1,4 +1,4 @@
-import java.util.*;
+
 
 public class PairV extends Value{
 	
@@ -16,7 +16,7 @@ public class PairV extends Value{
 		this.fst = f;
 	}
 	
-    public void setValueSnd(Value nsnd) {
+    public void setValueSnd(Value s) {
 		this.snd = s;
 	}
     

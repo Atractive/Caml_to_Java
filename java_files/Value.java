@@ -1,7 +1,8 @@
 
+
 abstract class Value extends Object {
 
-    void print_value() {
+    void printValue() {
 		System.out.print("print_value " + this + "NOT IMPLEMENTED");
     }
 	
