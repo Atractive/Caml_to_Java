@@ -1,4 +1,3 @@
-
 %{
 
 open Miniml
@@ -46,7 +45,7 @@ start: prog { $1 }
 
 prog:
   typedef mlexp end_marker_opt EOF
-	{ Prog ($1, $2) }
+	{Prog ($1, $2) }
 ;
 
 end_marker_opt:
@@ -57,7 +56,7 @@ end_marker_opt:
 
 typedef:
   { None }
-|  TYPE IDENTIFIER
+| TYPE IDENTIFIER
 	{ Some ($2) }
 ;
 
@@ -81,14 +80,14 @@ unary_op:
 
 primary_exp:
   IDENTIFIER
-	{ Var($1) }
- | BCONSTANT
-    { Bool($1) }
- | INTCONSTANT
-    { Int($1) }
- | unary_op
+    { Var($1) }
+| BCONSTANT
+	{ Bool($1) }
+| INTCONSTANT
+	{ Int($1) }
+| unary_op
     { PrimOp (UnOp($1)) }
- | LPAREN mlexp RPAREN
+| LPAREN mlexp RPAREN
     { $2 }
 ;
 
@@ -109,7 +108,7 @@ primary_exp_list_as_mlexp:
 ;
 
 mlexp:
-  mult_exp
+  pair_exp
     { $1 }
 | IF mlexp THEN mlexp ELSE mlexp
     { Cond($2, $4, $6) }
@@ -121,7 +120,7 @@ mlexp:
 
 let_binding:
   IDENTIFIER EQ mlexp
-	{ ($1, $3) }
+  { ($1, $3) }
 ;
 
 let_binding_list:
@@ -131,7 +130,7 @@ let_binding_list:
     { $1 :: $3 }
 ;
 
-/*	****************************** */
+/* ****************************** */
 
 /* ADD, SUB */
 add_exp:
@@ -182,5 +181,5 @@ pair_exp:
   or_exp
 	{ $1 }
 | LPAREN pair_exp COMMA pair_exp RPAREN
-	{ Pair($2,$4) }
+	{ Pair($2, $4) }
 ;
