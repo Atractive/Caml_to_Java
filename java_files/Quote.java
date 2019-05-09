@@ -1,25 +1,26 @@
 import java.util.*;
 
-class Quote extends Instr {
+public class Quote extends Instr {
 	
-    Value v;
+	/* Fields */
+    Value vv;
 	
-	 /* Constructors */
-    public Quote (Value vl) {
-        v = vl;
+	/* Constructors */
+    public Quote (Value v) {
+        this.vv = v;
+    }
+	
+	void set_value(Value v) {
+        this.vv = v;
     }
 
     Value get_value() {
-        return v;
+        return this.vv;
     }
 
-    void set_value(Value nv) {
-        v = nv;
-    }
-    
-    void exec_instr(Config cf) {
-        cf.set_value(v);
-        cf.get_code().pop();
+    void exec_instr(Config cfg) {
+        cfg.set_value(this.vv);
+        cfg.get_code().pop();
     }
 	
 }
