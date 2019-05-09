@@ -4,7 +4,7 @@ import java.util.*;
 public class LLE<A> extends LinkedList<A> {
     
     public static <A> LinkedList<A> empty () {
-        return (new LinkedList<A>());
+        return (new LinkedList<Instr>());
     }
 	
     public static <A> LinkedList<A> add_elem (A elem, LinkedList<A> list) {
