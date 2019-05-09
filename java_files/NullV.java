@@ -1,9 +1,10 @@
+import java.util.*;
 
-class NullV extends Value {
+public class NullV extends Value {
 
     /* Constructors */
-    public NullV () {
-    }
+    public NullV () {}
+	
     void print_value() {
         System.out.print("Null");
     }

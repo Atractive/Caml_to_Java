@@ -1,25 +1,25 @@
 import java.util.*;
 
-class IntV extends Value {
+public class IntV extends Value {
 	
     /* Fields */
     int iv;
 
     /* Constructors */
     public IntV (int i) {
-		iv = i;
+		this.iv = i;
+    }
+	
+	void set_int (int i) {
+        this.iv = i;
     }
 
     int get_int () {
-        return iv;
-    }
-	
-    void set_int (int i) {
-        iv = i;
+        return this.iv;
     }
 
     void print_value() {
-        System.out.print(iv);
+        System.out.print(this.iv);
     }
 	
 }
