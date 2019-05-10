@@ -1,5 +1,5 @@
 
-
+/* Value */
 public class ValueSE extends StackElem {
 	
 	/* Fields */

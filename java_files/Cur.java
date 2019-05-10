@@ -1,5 +1,6 @@
 import java.util.*;
 
+/* Construction d'une cloture */
 public class Cur extends Instr {
 	
 	private LinkedList<Instr> cc;

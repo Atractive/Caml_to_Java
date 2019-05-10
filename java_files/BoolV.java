@@ -1,5 +1,5 @@
 
-
+/* Boolean */
 public class BoolV extends Value {
 	
     /* Fields */

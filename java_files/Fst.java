@@ -1,5 +1,5 @@
 
-
+/* 1er élément d'une pair */
 public class Fst extends Instr {
 	
     void exec_instr(Config cfg) {

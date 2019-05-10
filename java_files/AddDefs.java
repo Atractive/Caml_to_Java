@@ -1,5 +1,6 @@
 import java.util.*;
 
+/* Définition de la fonctions locales */
 class AddDefs extends Instr {
 	
 	private LinkedList<Couple<String,LinkedList<Instr>>> defs;

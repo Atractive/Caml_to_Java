@@ -1,5 +1,6 @@
 import java.util.*;
 
+/* Closure */
 class ClosureV extends Value {
 	
     /* Fields */

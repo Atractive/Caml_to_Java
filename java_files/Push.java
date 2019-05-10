@@ -1,5 +1,5 @@
 
-
+/* On ajoute une valeur dans la pile */
 public class Push extends Instr {
 	
     void exec_instr(Config cfg) {

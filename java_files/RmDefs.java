@@ -1,5 +1,6 @@
 import java.util.*;
 
+/* Retrait des fonctions locales */
 public class RmDefs extends Instr {
 	
 	private int nn;

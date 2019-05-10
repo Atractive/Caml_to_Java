@@ -1,5 +1,5 @@
 
-
+/* Var */
 public class VarV extends Value {
 
     /* Fields */

@@ -1,5 +1,5 @@
 
-
+/* Return de la fonction */
 public class Return extends Instr {
 	
     void exec_instr(Config cfg) {

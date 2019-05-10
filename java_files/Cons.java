@@ -1,5 +1,5 @@
 
-
+/* Construction d'une paire */
 public class Cons extends Instr {
 	
     void exec_instr(Config cfg) {

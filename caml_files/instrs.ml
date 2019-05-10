@@ -42,26 +42,26 @@ let rec exec_aux = function
 	(* Divers *)
 	(PairV(x,y),PrimInstr(UnOp(Fst))::c,st,fds) -> exec_aux(x,c,st,fds) (* Fst *)
 	| (PairV(x,y),PrimInstr(UnOp(Snd))::c,st,fds) -> exec_aux(y,c,st,fds) (* Snd *)
-	| (x,Cons::c,(Val y)::d,fds) -> exec_aux(PairV(y,x),c,d,fds) (* Cons *)
-	| (x,Push::c,d,fds) -> exec_aux(x, c, (Val x)::d,fds) (* Push *)
-	| (x,Swap::c,(Val y)::d,fds) -> exec_aux(y,c,(Val x)::d,fds) (* Swap *)
-	| (t,(Quote v)::c,d,fds) -> exec_aux(v,c,d,fds) (* Quote *)
-	| (x,(Cur c1)::c,d,fds) -> exec_aux(ClosureV(c1,x),c,d,fds) (* Cur *)
-	| (x,Return::c,(Cod cc)::d,fds) -> exec_aux(x,cc,d,fds) (* Return *)
-	| (PairV(ClosureV(x,y),z),(App::c),d,fds) -> exec_aux(PairV(y,z),x,(Cod c)::d,fds) (* App *)
-	| ((BoolV b),Branch(c1,c2)::c,(Val x)::d,fds) -> exec_aux(x,(if b then c1 else c2),(Cod c)::d,fds) (* Branch *)
+	| (x,Cons::c,(Val y)::st,fds) -> exec_aux(PairV(y,x),c,st,fds) (* Cons *)
+	| (x,Push::c,st,fds) -> exec_aux(x, c, (Val x)::st,fds) (* Push *)
+	| (x,Swap::c,(Val y)::st,fds) -> exec_aux(y,c,(Val x)::st,fds) (* Swap *)
+	| (t,(Quote v)::c,st,fds) -> exec_aux(v,c,st,fds) (* Quote *)
+	| (x,(Cur c1)::c,st,fds) -> exec_aux(ClosureV(c1,x),c,st,fds) (* Cur *)
+	| (x,Return::c,(Cod cc)::st,fds) -> exec_aux(x,cc,st,fds) (* Return *)
+	| (PairV(ClosureV(x,y),z),(App::c),st,fds) -> exec_aux(PairV(y,z),x,(Cod c)::st,fds) (* App *)
+	| ((BoolV b),Branch(c1,c2)::c,(Val x)::st,fds) -> exec_aux(x,(if b then c1 else c2),(Cod c)::st,fds) (* Branch *)
 	(* Opérations *)
-	| (PairV((IntV m), (IntV n)), PrimInstr(BinOp(BArith(BAadd)))::c, d, fds) -> exec_aux(IntV (m + n), c, d, fds) (* + *)
-	| (PairV((IntV m), (IntV n)), PrimInstr(BinOp(BArith(BAsub)))::c, d, fds) -> exec_aux(IntV (m - n), c, d, fds) (* - *)
-	| (PairV((IntV m), (IntV n)), PrimInstr(BinOp(BArith(BAmul)))::c, d, fds) -> exec_aux(IntV (m * n), c, d, fds) (* * *)
-	| (PairV((IntV m), (IntV n)), PrimInstr(BinOp(BArith(BAdiv)))::c, d, fds) -> exec_aux(IntV (m / n), c, d, fds) (* / *)
-	| (PairV((IntV m), (IntV n)), PrimInstr(BinOp(BArith(BAmod)))::c, d, fds) -> exec_aux(IntV (m mod n), c, d, fds) (* mod *)
-	| (PairV((IntV m), (IntV n)), PrimInstr(BinOp(BCompar(BCeq)))::c, d, fds) -> exec_aux(BoolV (m == n), c, d, fds) (* == *)
-	| (PairV((IntV m), (IntV n)), PrimInstr(BinOp(BCompar(BCge)))::c, d, fds) -> exec_aux(BoolV (m >= n), c, d, fds) (* >= *)
-	| (PairV((IntV m), (IntV n)), PrimInstr(BinOp(BCompar(BCgt)))::c, d, fds) -> exec_aux(BoolV (m > n), c, d, fds) (* > *)
-	| (PairV((IntV m), (IntV n)), PrimInstr(BinOp(BCompar(BCle)))::c, d, fds) -> exec_aux(BoolV (m <= n), c, d, fds) (* <= *)
-	| (PairV((IntV m), (IntV n)), PrimInstr(BinOp(BCompar(BClt)))::c, d, fds) -> exec_aux(BoolV (m < n), c, d, fds) (* < *)
-	| (PairV((IntV m), (IntV n)), PrimInstr(BinOp(BCompar(BCne)))::c, d, fds) -> exec_aux(BoolV (m <> n), c, d, fds) (* <> *)
+	| (PairV((IntV m),(IntV n)),PrimInstr(BinOp(BArith(BAadd)))::c,st,fds) -> exec_aux(IntV(m + n),c,st,fds) (* + *)
+	| (PairV((IntV m),(IntV n)),PrimInstr(BinOp(BArith(BAsub)))::c,st,fds) -> exec_aux(IntV(m - n),c,st,fds) (* - *)
+	| (PairV((IntV m),(IntV n)),PrimInstr(BinOp(BArith(BAmul)))::c,st,fds) -> exec_aux(IntV(m * n),c,st,fds) (* * *)
+	| (PairV((IntV m),(IntV n)),PrimInstr(BinOp(BArith(BAdiv)))::c,st,fds) -> exec_aux(IntV(m / n),c,st,fds) (* / *)
+	| (PairV((IntV m),(IntV n)),PrimInstr(BinOp(BArith(BAmod)))::c,st,fds) -> exec_aux(IntV(m mod n),c,st,fds) (* mod *)
+	| (PairV((IntV m),(IntV n)),PrimInstr(BinOp(BCompar(BCeq)))::c,st,fds) -> exec_aux(BoolV(m == n),c,st,fds) (* == *)
+	| (PairV((IntV m),(IntV n)),PrimInstr(BinOp(BCompar(BCge)))::c,st,fds) -> exec_aux(BoolV(m >= n),c,st,fds) (* >= *)
+	| (PairV((IntV m),(IntV n)),PrimInstr(BinOp(BCompar(BCgt)))::c,st,fds) -> exec_aux(BoolV(m > n),c,st,fds) (* > *)
+	| (PairV((IntV m),(IntV n)),PrimInstr(BinOp(BCompar(BCle)))::c,st,fds) -> exec_aux(BoolV(m <= n),c,st,fds) (* <= *)
+	| (PairV((IntV m),(IntV n)),PrimInstr(BinOp(BCompar(BClt)))::c,st,fds) -> exec_aux(BoolV(m < n),c,st,fds) (* < *)
+	| (PairV((IntV m),(IntV n)),PrimInstr(BinOp(BCompar(BCne)))::c,st,fds) -> exec_aux(BoolV(m <> n),c,st,fds) (* <> *)
 	(* Appels récursifs *)
 	| (t,Call(f)::c,st,fds) -> (t,(List.assoc f fds)@c,st,fds) (* Call *)
 	| (t,AddDefs(defs)::c,st,fds) -> (t,c,st,defs@fds) (* AddDefs *)
@@ -82,6 +82,8 @@ let exec = function
 
 (* Access *)
 
+(* Ces fonctions permettent la gestion des variables dans l'environnement *)
+
 type envelem = EVar of var | EDef of var list;;
 
 let rec access_aux_def v env = match env with
@@ -101,30 +103,39 @@ let access v env = access_aux_var v env [];;
 
 (* ****************************** *)
 
-let rec addNameFunction defs = match defs with
-	|((name, body)::defs) -> name :: addNameFunction(defs)
-	| [] -> [];;
+(* Fix *)
 
-let rec compileBody defs env f = match defs with
-	|((name, body)::defs) -> (name,f(env,body)) :: (compileBody (defs) (env) (f) )
+(* Ces fonctions permettent la gestion des fonctions définies dans l'environnement récursif *)
+
+let rec funName defs = match defs with
+	|((n,b)::defs) -> n::funName(defs)
+	|[] -> [];;
+
+let rec compile_aux defs env f = match defs with
+	|((n,b)::defs) -> (n,f(env,b)) :: (compile_aux defs env f)
 	|[] -> [];;
 	
 (* ****************************** *)
 
 (* Compile *)
 
+(* 
+	Ces fonctions permettent, à partir d'un environnement et d'un terme, de renvoyer
+	l'ensemble des instructions à effectué par les fichiers java.
+*)
+
 let rec compile = function
 	|(env,Bool(b)) -> [Quote(BoolV(b))] (* Bool *)
 	|(env,Int(i)) -> [Quote(IntV(i))] (* Int *)
 	|(env,Var(v)) -> access v env (* Var *)
-	|(env,Fn(v,e)) -> [Cur((compile(EVar(v)::env, e))@[Return])]
+	|(env,Fn(v,e)) -> [Cur((compile(EVar(v)::env,e))@[Return])]
 	|(env,App(PrimOp(p),e)) -> compile(env,e)@[PrimInstr(p)]
 	|(env,App(f,a)) -> [Push]@(compile(env,f))@[Swap]@(compile(env,a))@[Cons;App]
 	|(env,Pair(e1,e2)) -> [Push]@(compile(env,e1))@[Swap]@(compile(env,e2))@[Cons]
 	|(env,Cond(i,t,e)) -> [Push]@compile(env,i)@[Branch(compile(env,t)@[Return],compile(env,e)@[Return])]
 	(* Appels récursifs *)
-	|(env,Fix(defs,e)) -> let dc = (compileBody (defs) (EDef((addNameFunction defs))::env) (compile)) in 
-								let ec = compile(EDef((addNameFunction defs))::env,e) in 
+	|(env,Fix(defs,e)) -> let dc = (compile_aux defs (EDef(funName defs)::env) compile) in 
+								let ec = compile(EDef((funName defs))::env,e) in 
 									[AddDefs dc] @ ec @ [RmDefs (List.length dc)];;
 
 let compile_prog = function
@@ -132,6 +143,14 @@ let compile_prog = function
 
 (* ****************************** *)
 
+(* Print *)
+
+(* 	
+	Ces fonctions ont pour but de créer le fichier Gen.java à partir des informations compilées.
+	A chaque instruction ou valeur, on écrit son équivalent en java.
+*)
+
+(* Instructions *)
 let rec print_instr = function
 	(* Divers *)
 	(PrimInstr(UnOp(Fst))::config) -> "\nLLE.add_elem(new Fst(),"^print_instr(config)^")" (* Fst *)
@@ -163,7 +182,7 @@ let rec print_instr = function
 	(* Cas de base *)
 	|[] -> "LLE.empty()"
 
-(*Partie représentant l'écriture des différentes Value*)
+(* Valeurs *)
 and print_value = function 
 	  NullV -> "new NullV()"
 	| IntV(v) -> "new IntV("^(string_of_int v)^")"
@@ -172,12 +191,12 @@ and print_value = function
 	| PairV(x,y) -> "new PairV("^print_value(x)^","^print_value(y)^")"
 	| ClosureV(c,v) -> "new ClosureV("^print_instr(c)^","^print_value(v)^")"
 	
-(*Partie représentant l'écrire de lapile de définitions de fonctions en Java*)
+(* Pile *)
 and print_defs = function
-	((name,body)::defs) -> "LLE.add_elem(new Couple(\""^name^"\","^(print_instr body)^"), "^(print_defs defs)^")"
+	((n,b)::defs) -> "LLE.add_elem(new Couple(\""^n^"\","^(print_instr b)^"), "^(print_defs defs)^")"
     | [] -> "LLE.empty()";;
 
-(*Fonction permettant d'écrire en Java le code compilé en Caml.*)
+(* Fonction principale *)
 let print_gen_class_to_java = function 
 	cfg -> "import java.util.*; \n" ^
 			"public class Gen { \n" ^

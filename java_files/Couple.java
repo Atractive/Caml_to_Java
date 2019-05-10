@@ -1,5 +1,5 @@
 
-
+/* Couple */
 public class Couple<First,Second> {
 	
     private First fst;

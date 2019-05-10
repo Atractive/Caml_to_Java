@@ -1,5 +1,5 @@
 
-
+/* Placer l'élément au sommet de la pile */
 public class Swap extends Instr {
 	
     void exec_instr(Config cfg) {
