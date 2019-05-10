@@ -27,7 +27,7 @@ class Config extends Object {
         this.cc = c;
     }
 	
-    void getStack(LinkedList<StackElem> s) {
+    void setStack(LinkedList<StackElem> s) {
         this.ss = s;
     }
 	
