@@ -4,8 +4,8 @@
 Le but de ce projet est de proposer un ensemble de script permettant, dans un premier temps de compiler et de traduire une suite d'instruction Caml en Java, puis d'éxécuter cette traduction avec Java.
 
 ## Historique
-### 46 commits 
-  - Caml 
+### 47 commits 
+  - Caml  
     -> Ajout des fichiers de départ  
     -> Mise en place du "parser.mly"  
     -> Ajout de la fonction "exec" dans "instr.ml"  
@@ -37,7 +37,7 @@ Puis on doit générer le fichier Java :
 cd ../
 ./caml_files/comp/ "caml_files/tests/test.ml" "java_files/Gen.java"
 ```
-Enfin on doit compiler les fichiers Java :
+Enfin on doit compiler les fichiers Java et éxécuter le "Main.java" :
 ```
 javac java_files/*.java  
 javac java_files/Main.java
